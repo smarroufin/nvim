@@ -54,10 +54,10 @@ return {
         desc = 'Search [N]eovim files',
       },
       -- lsp keys
-      { 'gd', require('telescope.builtin').lsp_definitions, desc = '[G]oto [D]efinition' },
-      { 'gr', require('telescope.builtin').lsp_references, desc = '[G]oto [R]eferences' },
-      { 'gi', require('telescope.builtin').lsp_implementations, desc = '[G]oto [I]mplementation' },
-      { '<leader>ds', require('telescope.builtin').lsp_document_symbols, desc = '[D]ocument [S]ymbols' },
+      { 'grd', require('telescope.builtin').lsp_definitions, desc = 'Goto [D]efinition' },
+      { 'grr', require('telescope.builtin').lsp_references, desc = 'Goto [R]eferences' },
+      { 'gri', require('telescope.builtin').lsp_implementations, desc = 'Goto [I]mplementation' },
+      { 'gO', require('telescope.builtin').lsp_document_symbols, desc = 'Document Symbols' },
     },
     config = function()
       local telescope = require('telescope')

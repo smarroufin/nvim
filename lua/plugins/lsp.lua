@@ -67,17 +67,6 @@ return {
       },
     },
     config = function()
-      vim.api.nvim_create_autocmd('LspAttach', {
-        group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
-        callback = function(event)
-          -- local set = function(mode, keys, func, desc)
-          --   vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
-          -- end
-          -- set('n', 'gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-          -- set('n', '<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-          -- set({ 'n', 'x' }, '<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-        end,
-      })
       require('mason').setup()
       require('mason-lspconfig').setup({
         handlers = {
