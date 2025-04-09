@@ -25,6 +25,41 @@ return {
         enabled = vim.g.have_nerd_font,
       },
     },
+    keys = {
+      -- search keys
+      { '<leader>f', require('telescope.builtin').find_files, desc = 'Search [F]iles' },
+      -- {
+      --   '<leader>f',
+      --   function()
+      --     vim.fn.system('git rev-parse --is-inside-work-tree')
+      --     local is_inside_work_tree = vim.v.shell_error == 0
+      --
+      --     if is_inside_work_tree then
+      --       require('telescope.builtin').git_files({ show_untracked = true })
+      --     else
+      --       require('telescope.builtin').find_files()
+      --     end
+      --   end,
+      --   desc = 'Search [F]iles',
+      -- },
+      { '<leader>s', require('telescope.builtin').live_grep, desc = '[S]earch text' }, -- requires ripgrep
+      { '<leader>s', require('telescope.builtin').grep_string, desc = '[S]earch text', mode = 'v' }, -- requires ripgrep
+      { '<leader>r', require('telescope.builtin').resume, desc = 'Search [R]esume' },
+      -- beginner keys
+      { '<leader>k', require('telescope.builtin').keymaps, desc = 'Search [K]eymaps' },
+      {
+        '<leader>n',
+        function()
+          require('telescope.builtin').find_files({ cwd = vim.fn.stdpath('config') })
+        end,
+        desc = 'Search [N]eovim files',
+      },
+      -- lsp keys
+      { 'gd', require('telescope.builtin').lsp_definitions, desc = '[G]oto [D]efinition' },
+      { 'gr', require('telescope.builtin').lsp_references, desc = '[G]oto [R]eferences' },
+      { 'gi', require('telescope.builtin').lsp_implementations, desc = '[G]oto [I]mplementation' },
+      { '<leader>ds', require('telescope.builtin').lsp_document_symbols, desc = '[D]ocument [S]ymbols' },
+    },
     config = function()
       require('telescope').setup({
         extensions = {
@@ -41,21 +76,6 @@ return {
       })
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
-      local builtin = require('telescope.builtin')
-      vim.keymap.set('n', '<leader>k', builtin.keymaps, { desc = 'Search [K]eymaps' })
-      vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Search [F]iles' })
-      vim.keymap.set('n', '<leader>r', builtin.resume, { desc = 'Search [R]esume' })
-      vim.keymap.set('n', '<leader>s', builtin.live_grep, { desc = '[S]earch text' }) -- requires ripgrep
-      vim.keymap.set('v', '<leader>s', builtin.grep_string, { desc = '[S]earch text' }) -- requires ripgrep
-      vim.keymap.set('n', '<leader>n', function()
-        builtin.find_files({ cwd = vim.fn.stdpath('config') })
-      end, { desc = 'Search [N]eovim files' })
-      vim.keymap.set('n', '<leader>/', function()
-        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
-          winblend = 10,
-          previewer = false,
-        }))
-      end, { desc = '[/] Fuzzily search in current buffer' })
     end,
   },
 }

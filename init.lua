@@ -33,22 +33,16 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 5
 
 -- [[ Keymaps ]]
-vim.keymap.set('n', '<Space>', '<Nop>') -- Unmap space
-vim.keymap.set('n', '<Esc>', '<Esc>:noh<CR>')
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float)
+vim.keymap.set('n', '<Space>', '<Nop>', { desc = 'Unmap space' })
+vim.keymap.set('n', '<Esc>', '<Esc>:noh<CR>', { desc = 'Clear highlights' })
+-- Diagnostic
+vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Diagnostic details' })
 vim.keymap.set('n', '<leader>dk', function()
   vim.diagnostic.jump({ count = -1 })
-end)
+end, { desc = 'Previous diagnostic' })
 vim.keymap.set('n', '<leader>dj', function()
   vim.diagnostic.jump({ count = 1 })
-end)
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
--- This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+end, { desc = 'Next diagnostic' })
 -- Split navigation
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
@@ -57,6 +51,8 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- Indent
 vim.keymap.set('v', '<', '<gv', { desc = 'Keep visual selection after indent' })
 vim.keymap.set('v', '>', '>gv', { desc = 'Keep visual selection after indent' })
+-- Terminal
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- [[ Basic Autocommands ]]
 -- Highlight when yanking (copying) text

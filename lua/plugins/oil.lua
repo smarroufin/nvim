@@ -8,6 +8,7 @@ return {
         function()
           require('oil').open()
         end,
+        desc = 'Open Oil',
       },
     },
     opts = {},

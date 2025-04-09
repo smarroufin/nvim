@@ -9,7 +9,6 @@ return {
         function()
           require('conform').format()
         end,
-        mode = 'n',
         desc = 'Format buffer with [C]onform',
       },
     },
