@@ -1,7 +1,6 @@
 -- https://neovim.io/doc/user/options.html
 -- [[ Global ]]
 vim.g.mapleader = ' '
-vim.g.have_nerd_font = true
 
 -- [[ Options ]]
 vim.opt.number = true
@@ -76,22 +75,4 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
-require('lazy').setup('plugins', {
-  ui = {
-    icons = vim.g.have_nerd_font and {} or {
-      cmd = '⌘',
-      config = '🛠',
-      event = '📅',
-      ft = '📂',
-      init = '⚙',
-      keys = '🗝',
-      plugin = '🔌',
-      runtime = '💻',
-      require = '🌙',
-      source = '📄',
-      start = '🚀',
-      task = '📌',
-      lazy = '💤 ',
-    },
-  },
-})
+require('lazy').setup('plugins', {})

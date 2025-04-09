@@ -2,13 +2,7 @@ return {
   {
     'mbbill/undotree',
     keys = {
-      {
-        '<leader>u',
-        function()
-          vim.cmd.UndotreeToggle()
-        end,
-        desc = 'Open [U]ndoTree',
-      },
+      { '<leader>u', vim.cmd.UndotreeToggle, desc = 'Open [U]ndoTree' },
     },
   },
 }

@@ -22,7 +22,6 @@ return {
       },
       {
         'nvim-tree/nvim-web-devicons',
-        enabled = vim.g.have_nerd_font,
       },
     },
     keys = {
@@ -61,21 +60,17 @@ return {
       { '<leader>ds', require('telescope.builtin').lsp_document_symbols, desc = '[D]ocument [S]ymbols' },
     },
     config = function()
-      require('telescope').setup({
+      local telescope = require('telescope')
+      telescope.setup({
         extensions = {
-          fzf = {
-            fuzzy = true,
-            override_generic_sorter = true,
-            override_file_sorter = true,
-            case_mode = 'smart_case',
-          },
+          fzf = {},
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
         },
       })
-      pcall(require('telescope').load_extension, 'fzf')
-      pcall(require('telescope').load_extension, 'ui-select')
+      telescope.load_extension('fzf')
+      telescope.load_extension('ui-select')
     end,
   },
 }
