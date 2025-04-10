@@ -1,12 +1,10 @@
 return {
-  { -- Fuzzy Finder (files, lsp, etc)
+  {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
     branch = '0.1.x',
     dependencies = {
-      {
-        'nvim-lua/plenary.nvim',
-      },
+      'nvim-lua/plenary.nvim',
       {
         'nvim-telescope/telescope-fzf-native.nvim', -- requires gcc & make
         build = 'make',
@@ -14,15 +12,9 @@ return {
           return vim.fn.executable('make') == 1
         end,
       },
-      {
-        'nvim-telescope/telescope-ui-select.nvim',
-      },
-      {
-        'nvim-treesitter/nvim-treesitter',
-      },
-      {
-        'nvim-tree/nvim-web-devicons',
-      },
+      'nvim-telescope/telescope-ui-select.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons',
     },
     keys = {
       -- search keys

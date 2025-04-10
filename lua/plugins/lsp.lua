@@ -1,4 +1,3 @@
--- `:Mason`, `:MasonInstall package`
 -- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/configs
 local servers = {
   ts_ls = {
@@ -24,22 +23,19 @@ local servers = {
 }
 
 return {
-  { -- LSP Configuration
+  {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
     dependencies = {
-      { -- Manage LSP servers, DAP servers, linters, and formatters
+      {
         'williamboman/mason.nvim',
+        cmd = { 'Mason' },
+        opts = {},
       },
-      { -- Bridge between mason.nvim & nvim-lspconfig
-        'williamboman/mason-lspconfig.nvim',
-      },
-      { -- Extra capabilities provided by nvim-cmp
-        'hrsh7th/cmp-nvim-lsp',
-      },
+      'williamboman/mason-lspconfig.nvim',
+      'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
-      require('mason').setup()
       require('mason-lspconfig').setup({
         handlers = {
           function(server_name)
