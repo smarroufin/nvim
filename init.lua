@@ -37,6 +37,17 @@ vim.opt.undofile = true
 vim.keymap.set('n', '<Space>', '<Nop>', { desc = 'Unmap space' })
 vim.keymap.set('n', '<Esc>', '<Esc>:noh<CR>', { desc = 'Clear highlights' })
 -- Diagnostic
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '󰅙',
+      [vim.diagnostic.severity.WARN] = '',
+      [vim.diagnostic.severity.INFO] = '󰋼',
+      [vim.diagnostic.severity.HINT] = '󰌵',
+    },
+  },
+  virtual_text = { current_line = true },
+})
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Diagnostic details' })
 vim.keymap.set('n', '<leader>dk', function()
   vim.diagnostic.jump({ count = -1 })
