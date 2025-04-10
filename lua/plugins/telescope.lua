@@ -44,6 +44,11 @@ return {
       { 'grr', require('telescope.builtin').lsp_references, desc = 'Goto [R]eferences' },
       { 'gri', require('telescope.builtin').lsp_implementations, desc = 'Goto [I]mplementation' },
       { 'gO', require('telescope.builtin').lsp_document_symbols, desc = 'Document Symbols' },
+      -- git
+      { '<leader>gs', require('telescope.builtin').git_status, desc = 'Git status' },
+      { '<leader>gb', require('telescope.builtin').git_branches, desc = 'Git branches' },
+      { '<leader>gc', require('telescope.builtin').git_commits, desc = 'Git commits' },
+      { '<leader>gf', require('telescope.builtin').git_bcommits, desc = 'Git file commits' },
     },
     config = function()
       local telescope = require('telescope')
