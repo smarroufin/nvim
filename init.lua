@@ -30,6 +30,8 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 vim.opt.scrolloff = 5
+-- Save file history for undotree
+vim.opt.undofile = true
 
 -- [[ Keymaps ]]
 vim.keymap.set('n', '<Space>', '<Nop>', { desc = 'Unmap space' })
