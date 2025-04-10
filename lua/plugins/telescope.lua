@@ -27,23 +27,17 @@ return {
     keys = {
       -- search keys
       { '<leader>f', require('telescope.builtin').find_files, desc = 'Search [F]iles' },
-      -- {
-      --   '<leader>f',
-      --   function()
-      --     vim.fn.system('git rev-parse --is-inside-work-tree')
-      --     local is_inside_work_tree = vim.v.shell_error == 0
-      --
-      --     if is_inside_work_tree then
-      --       require('telescope.builtin').git_files({ show_untracked = true })
-      --     else
-      --       require('telescope.builtin').find_files()
-      --     end
-      --   end,
-      --   desc = 'Search [F]iles',
-      -- },
+      {
+        '<leader>F',
+        function()
+          require('telescope.builtin').find_files({ no_ignore = true, no_ignore_parent = true })
+        end,
+        desc = 'Search All [F]iles',
+      },
       { '<leader>s', require('telescope.builtin').live_grep, desc = '[S]earch text' }, -- requires ripgrep
       { '<leader>s', require('telescope.builtin').grep_string, desc = '[S]earch text', mode = 'v' }, -- requires ripgrep
       { '<leader>r', require('telescope.builtin').resume, desc = 'Search [R]esume' },
+      { '<leader>b', require('telescope.builtin').buffers, desc = 'Search [B]uffers' },
       -- beginner keys
       { '<leader>k', require('telescope.builtin').keymaps, desc = 'Search [K]eymaps' },
       {
@@ -61,7 +55,23 @@ return {
     },
     config = function()
       local telescope = require('telescope')
+      local telescopeConfig = require('telescope.config')
+
+      local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
+      table.insert(vimgrep_arguments, '--hidden')
+      table.insert(vimgrep_arguments, '--glob=!**/.git/*')
+
       telescope.setup({
+        defaults = {
+          -- Ignore `.git/` folder in text grep commands
+          vimgrep_arguments = vimgrep_arguments,
+        },
+        pickers = {
+          find_files = {
+            -- Ignore `.git/` folder
+            find_command = { 'rg', '--files', '--hidden', '--glob=!**/.git/*' },
+          },
+        },
         extensions = {
           fzf = {},
           ['ui-select'] = {
