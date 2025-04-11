@@ -55,11 +55,8 @@ end, { desc = 'Previous diagnostic' })
 vim.keymap.set('n', '<leader>dj', function()
   vim.diagnostic.jump({ count = 1 })
 end, { desc = 'Next diagnostic' })
--- Split navigation
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- Window
+vim.keymap.set('n', '<leader>w', '<C-w>')
 -- Indent
 vim.keymap.set('v', '<', '<gv', { desc = 'Keep visual selection after indent' })
 vim.keymap.set('v', '>', '>gv', { desc = 'Keep visual selection after indent' })
