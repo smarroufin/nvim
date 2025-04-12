@@ -1,5 +1,27 @@
 -- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/configs
 local servers = {
+  eslint = {
+    settings = {
+      codeActionOnSave = {
+        enable = true, -- If not enabled, eslint LSP won't respond to "source.fixAll" requests
+      },
+      format = {
+        enable = true, -- If not enabled, eslint LSP won't respond to document formatting requests
+      },
+      workingDirectories = {
+        mode = 'auto',
+      },
+    },
+  },
+  html = {
+    settings = {
+      html = {
+        format = {
+          wrapLineLength = 0,
+        },
+      },
+    },
+  },
   ts_ls = {
     filetypes = {
       'javascript',
@@ -20,7 +42,27 @@ local servers = {
       },
     },
   },
+  volar = {
+    settings = {
+      html = {
+        format = {
+          enable = false, -- Disabled to avoid conflicts with eslint stylistic rules
+        },
+      },
+    },
+  },
 }
+
+local function setup_server(server_name)
+  local server = servers[server_name] or {}
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+  server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+  -- server.on_attach = function(client, bufnr)
+  --   vim.print(client.name)
+  -- end
+  require('lspconfig')[server_name].setup(server)
+end
 
 return {
   {
@@ -37,15 +79,9 @@ return {
     },
     config = function()
       require('mason-lspconfig').setup({
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
+        ensure_installed = {},
+        automatic_installation = false,
+        handlers = { setup_server },
       })
     end,
   },
