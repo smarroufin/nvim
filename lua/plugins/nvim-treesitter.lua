@@ -20,6 +20,8 @@ return {
         'html',
         'javascript',
         'lua',
+        'markdown',
+        'markdown_inline',
         'query',
         'typescript',
         'vim',
