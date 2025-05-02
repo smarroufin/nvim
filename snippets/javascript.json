@@ -1,0 +1,74 @@
+{
+  "log1": {
+    "prefix": [
+      "log1"
+    ],
+    "body": [
+      "console.log($1)"
+    ]
+  },
+  "log2": {
+    "prefix": [
+      "log2"
+    ],
+    "body": [
+      "console.log('$1', $1)"
+    ]
+  },
+  "logDeep": {
+    "prefix": [
+      "logDeep"
+    ],
+    "body": [
+      "console.dir($1, { depth: null })"
+    ]
+  },
+  "sleep": {
+    "prefix": [
+      "sleep"
+    ],
+    "body": [
+      "await new Promise(function(resolve) { setTimeout(resolve, $1) })"
+    ]
+  },
+  "unique": {
+    "prefix": [
+      "unique"
+    ],
+    "body": [
+      "[...new Set($1)]"
+    ]
+  },
+  "strapi.query": {
+    "prefix": [
+      "strapi.query"
+    ],
+    "body": [
+      "strapi.query('api::$1.$1')"
+    ]
+  },
+  "strapi.doc": {
+    "prefix": [
+      "strapi.doc"
+    ],
+    "body": [
+      "strapi.documents('api::$1.$1')"
+    ]
+  },
+  "strapi.errors": {
+    "prefix": [
+      "strapi.errors"
+    ],
+    "body": [
+      "import { errors } from '@strapi/utils'"
+    ]
+  },
+  "strapi.factories": {
+    "prefix": [
+      "strapi.factories"
+    ],
+    "body": [
+      "import { factories } from '@strapi/strapi'"
+    ]
+  }
+}

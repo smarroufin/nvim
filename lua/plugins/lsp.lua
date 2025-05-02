@@ -55,9 +55,13 @@ local servers = {
 
 local function setup_server(server_name)
   local server = servers[server_name] or {}
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-  server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+  server.capabilities = vim.tbl_deep_extend(
+    'force',
+    vim.lsp.protocol.make_client_capabilities(),
+    -- require('cmp_nvim_lsp').default_capabilities(),
+    require('blink.cmp').get_lsp_capabilities(),
+    server.capabilities or {}
+  )
   -- server.on_attach = function(client, bufnr)
   --   vim.print(client.name)
   -- end
@@ -75,7 +79,8 @@ return {
         opts = {},
       },
       'williamboman/mason-lspconfig.nvim',
-      'hrsh7th/cmp-nvim-lsp',
+      -- 'hrsh7th/cmp-nvim-lsp',
+      'saghen/blink.cmp',
     },
     config = function()
       require('mason-lspconfig').setup({

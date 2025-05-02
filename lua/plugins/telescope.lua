@@ -17,7 +17,7 @@ return {
       'nvim-tree/nvim-web-devicons',
     },
     keys = {
-      -- search keys
+      -- search
       { '<leader>f', require('telescope.builtin').find_files, desc = 'Search [F]iles' },
       {
         '<leader>F',
@@ -29,17 +29,17 @@ return {
       { '<leader>s', require('telescope.builtin').live_grep, desc = '[S]earch text' }, -- requires ripgrep
       { '<leader>s', require('telescope.builtin').grep_string, desc = '[S]earch text', mode = 'v' }, -- requires ripgrep
       { '<leader>r', require('telescope.builtin').resume, desc = 'Search [R]esume' },
-      { '<leader>b', require('telescope.builtin').buffers, desc = 'Search [B]uffers' },
-      -- beginner keys
-      { '<leader>k', require('telescope.builtin').keymaps, desc = 'Search [K]eymaps' },
+      { '<leader>sb', require('telescope.builtin').buffers, desc = 'Search [B]uffers' },
+      { '<leader>sk', require('telescope.builtin').keymaps, desc = 'Search [K]eymaps' },
+      { '<leader>sh', require('telescope.builtin').help_tags, desc = 'Search [H]elp' },
       {
-        '<leader>n',
+        '<leader>sn',
         function()
           require('telescope.builtin').find_files({ cwd = vim.fn.stdpath('config') })
         end,
         desc = 'Search [N]eovim files',
       },
-      -- lsp keys
+      -- lsp
       { 'grd', require('telescope.builtin').lsp_definitions, desc = 'Goto [D]efinition' },
       { 'grr', require('telescope.builtin').lsp_references, desc = 'Goto [R]eferences' },
       { 'gri', require('telescope.builtin').lsp_implementations, desc = 'Goto [I]mplementation' },
@@ -49,6 +49,9 @@ return {
       { '<leader>gb', require('telescope.builtin').git_branches, desc = 'Git branches' },
       { '<leader>gc', require('telescope.builtin').git_commits, desc = 'Git commits' },
       { '<leader>gf', require('telescope.builtin').git_bcommits, desc = 'Git file commits' },
+      { '<leader>gh', require('telescope.builtin').git_stash, desc = 'Git stash' },
+      -- telescope
+      { '<leader><leader>b', require('telescope.builtin').builtin, desc = 'Builtin' },
     },
     config = function()
       local telescope = require('telescope')
@@ -62,6 +65,12 @@ return {
         defaults = {
           -- Ignore `.git/` folder in text grep commands
           vimgrep_arguments = vimgrep_arguments,
+          layout_config = {
+            horizontal = {
+              width = 0.9,
+              preview_cutoff = 100,
+            },
+          },
         },
         pickers = {
           find_files = {

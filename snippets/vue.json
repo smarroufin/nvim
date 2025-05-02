@@ -1,0 +1,18 @@
+{
+  "<NuxtLink>": {
+    "prefix": [
+      "<NuxtLink>"
+    ],
+    "body": [
+      "<NuxtLink to=\"$1\">$2</NuxtLink>"
+    ]
+  },
+  "<vue>": {
+    "prefix": [
+      "<vue>"
+    ],
+    "body": [
+      "<script setup lang=\"ts\">\n$1\n</script>\n\n<template>\n\n</template>\n"
+    ]
+  }
+}
