@@ -9,6 +9,13 @@ return {
       keymap = {
         preset = 'enter',
       },
+      completion = {
+        list = {
+          selection = {
+            auto_insert = false,
+          },
+        },
+      },
       fuzzy = {
         sorts = {
           'exact',

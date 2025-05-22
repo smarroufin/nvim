@@ -26,9 +26,8 @@ return {
         end,
         desc = 'Search All [F]iles',
       },
-      { '<leader>s', require('telescope.builtin').live_grep, desc = '[S]earch text' }, -- requires ripgrep
-      { '<leader>s', require('telescope.builtin').grep_string, desc = '[S]earch text', mode = 'v' }, -- requires ripgrep
-      { '<leader>r', require('telescope.builtin').resume, desc = 'Search [R]esume' },
+      { '<leader>sg', require('telescope.builtin').live_grep, desc = 'Search text [G]rep' }, -- requires ripgrep
+      { '<leader>sr', require('telescope.builtin').resume, desc = 'Search [R]esume' },
       { '<leader>sb', require('telescope.builtin').buffers, desc = 'Search [B]uffers' },
       { '<leader>sk', require('telescope.builtin').keymaps, desc = 'Search [K]eymaps' },
       { '<leader>sh', require('telescope.builtin').help_tags, desc = 'Search [H]elp' },
@@ -39,6 +38,8 @@ return {
         end,
         desc = 'Search [N]eovim files',
       },
+      -- todo-comments
+      { '<leader>st', '<CMD>TodoTelescope<CR>', desc = 'Search [T]oDo' },
       -- lsp
       { 'grd', require('telescope.builtin').lsp_definitions, desc = 'Goto [D]efinition' },
       { 'grr', require('telescope.builtin').lsp_references, desc = 'Goto [R]eferences' },
@@ -87,6 +88,13 @@ return {
       })
       telescope.load_extension('fzf')
       telescope.load_extension('ui-select')
+      -- configure file preview
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'TelescopePreviewerLoaded',
+        callback = function()
+          vim.wo.wrap = true
+        end,
+      })
     end,
   },
 }

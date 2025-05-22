@@ -14,6 +14,7 @@ return {
         accept_line = '<C-M-l>',
         accept_block = '<Tab>',
         suggest = '<C-j>',
+        suggest_next = '<C-Down>',
       },
     },
   },

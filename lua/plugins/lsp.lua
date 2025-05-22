@@ -62,9 +62,25 @@ local function setup_server(server_name)
     require('blink.cmp').get_lsp_capabilities(),
     server.capabilities or {}
   )
-  -- server.on_attach = function(client, bufnr)
-  --   vim.print(client.name)
-  -- end
+  server.on_attach = function(client, bufnr)
+    local augroup = vim.api.nvim_create_augroup('OnSaveGroup', {})
+    if client.supports_method('textDocument/formatting') then
+      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+          require('conform').format({ async = false })
+          local eslintable_filetypes = { 'vue' }
+          if vim.tbl_contains(eslintable_filetypes, vim.bo[bufnr].filetype) then
+            if vim.fn.exists(':EslintFixAll') > 0 then
+              vim.cmd.EslintFixAll()
+            end
+          end
+        end,
+      })
+    end
+  end
   require('lspconfig')[server_name].setup(server)
 end
 
@@ -85,6 +101,7 @@ return {
     config = function()
       require('mason-lspconfig').setup({
         ensure_installed = {},
+        automatic_enable = true,
         automatic_installation = false,
         handlers = { setup_server },
       })
